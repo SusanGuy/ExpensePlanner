@@ -84,9 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  final titleController = TextEditingController();
-
-  final amountController = TextEditingController();
+  void _removeTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((element) => element.id == id);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Chart(_recentTransactions),
-              TransactionList(_userTransactions)
+              TransactionList(_userTransactions, _removeTransaction)
             ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
